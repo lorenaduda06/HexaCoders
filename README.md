@@ -30,7 +30,7 @@
     Interface intuitiva que proporcione UX satisfatória, autonomia ao cliente e controle total ao prestador de serviço.
 </p>
 
-<h2>Objetivos Específicos:</h2>
+<h2>Objetivos Específicos: </h2>
 <ul>
     <li>Oferecer um processo de agendamento simples, rápido e acessível.</li>
     <li>Centralizar as informações de horários, serviços e profissionais em uma única plataforma.</li>
