@@ -1,4 +1,20 @@
-<h1>Sistema de Agendamento para Espaço de Beleza</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>BeautyFlow - README</title>
+</head>
+<body>
+
+<h1>💅 BeautyFlow</h1>
+
+<p>
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License MIT">
+</p>
+
+<hr>
+
+<h2>👨‍💻 Autores</h2>
 
 <strong>HexaCoders</strong>
 <p>Equipe:</p>
@@ -13,64 +29,106 @@
 <p>Curso: Análise e Desenvolvimento de Sistemas - UTFPR</p>
 <p>2026/01</p>
 
-<h2>Descrição do Projeto</h2>
+<hr>
+
+<h2>📌 Sobre o Projeto</h2>
 <p>
-    Nosso intuito é desenvolver uma solução focada na modernização da gestão de estabelecimentos de estética, a partir do uso de uma plataforma centralizada que possibilite otimizar a conexão entre clientes e profissionais.
+O <strong>BeautyFlow</strong> é um sistema web desenvolvido para auxiliar na gestão de clínicas e espaços de estética.
+O projeto centraliza as principais operações do negócio, como agendamentos, controle de clientes, serviços e fluxo financeiro,
+em uma interface simples e intuitiva.
 </p>
 
-<h2>Objetivos Específicos: </h2>
-<ul>
-    <li>Oferecer um processo de agendamento simples, rápido e acessível.</li>
-    <li>Centralizar as informações de horários, serviços e profissionais em uma única plataforma.</li>
-    <li>Reduzir falhas de comunicação e conflitos de agenda.</li>
-    <li>Proporcionar autonomia ao cliente na escolha de horários e serviços.</li>
-    <li>Facilitar a gestão da agenda por parte dos prestadores de serviço.</li>
-</ul>
-
-<strong>Problema:</strong>
-<ul>
-    <li>Conflitos de horários (marcações duplas).</li>
-     <li>Esquecimentos e ausências não comunicadas.</li>
-    <li>Perda de tempo em comunicações manuais para confirmar agendamentos.</li>
-</ul>
-
 <p>
-    <strong>Solução:</strong>
-    Interface intuitiva que proporcione UX satisfatória, autonomia ao cliente e controle total ao prestador de serviço.
+A aplicação foi construída como um protótipo funcional, com foco em organização, usabilidade e simulação de um sistema real.
 </p>
 
-<h2>Escopo e Funcionalidades</h2>
-<h3>Cadastro de Usuários</h3>
-<p>O sistema contará com dois perfis de usuário: cliente e prestador de serviço. Cada perfil terá acesso a funcionalidades específicas de acordo com seu papel, sendo o cadastro realizado por meio de informações básicas como nome, contato e dados de acesso.</p>
+<hr>
 
-<h3>Visualização de Horários Disponíveis</h3>
-<p>Os clientes poderão consultar em tempo real os horários disponíveis por profissional e por tipo de serviço, garantindo transparência e agilidade na escolha do melhor momento para o atendimento.</p>
-
-<h3>Realização de Agendamentos</h3>
-<p>A plataforma permitirá que o cliente selecione o serviço desejado, o profissional de sua preferência e o horário disponível, concluindo o agendamento de forma simples e em poucos passos.</p>
-
-<h3>Cancelamento e Remarcação de Horários</h3>
-<p>Tanto clientes quanto prestadores poderão cancelar ou remarcar agendamentos diretamente pelo sistema, mantendo a agenda sempre atualizada e evitando ausências não comunicadas.</p>
-
-<h3>Listagem de Agendamentos Realizados</h3>
-<p>O sistema disponibilizará um histórico de agendamentos para ambos os perfis, permitindo o acompanhamento de atendimentos passados e futuros de maneira organizada.</p>
-
-<h2>Público-alvo</h2>
+<h2>🚀 Funcionalidades</h2>
 <ul>
-    <li>Profissionais e estabelecimentos de estética.</li>
-    <li>Clientes que desejam agendar serviços de forma prática.</li>
+    <li>Agendamento de clientes</li>
+    <li>Cadastro e gerenciamento de clientes</li>
+    <li>Gestão de serviços</li>
+    <li>Controle de retorno de clientes</li>
+    <li>Controle de consumo de produtos</li>
+    <li>Fluxo de caixa (entradas e saídas)</li>
 </ul>
 
-<h2>Tecnologias utilizadas:</h2>
+<hr>
 
+<h2>👤 Perfis de Usuário</h2>
+<ul>
+    <li><strong>Secretária:</strong> responsável por agendar atendimentos</li>
+    <li><strong>Colaborador:</strong> visualiza atendimentos e serviços a executar</li>
+    <li><strong>Gerente:</strong> supervisiona clientes e controle de insumos</li>
+    <li><strong>Dono:</strong> acompanha fluxo financeiro e desempenho geral</li>
+</ul>
+
+<hr>
+
+<h2>🖥️ Tecnologias Utilizadas</h2>
 <ul>
     <li>HTML</li>
     <li>CSS</li>
     <li>JavaScript</li>
 </ul>
 
-<p>Licença:</p>
+<hr>
 
-Este projeto está sob a licença MIT.
+<h2>🎯 Objetivo</h2>
+<p>
+O objetivo do projeto é demonstrar a estrutura de um sistema de gestão para estética, servindo como base para evolução futura
+com backend, banco de dados e autenticação de usuários.
+</p>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<hr>
+
+<h2>🔮 Melhorias Futuras</h2>
+<ul>
+    <li>Integração com banco de dados</li>
+    <li>Sistema de login e autenticação</li>
+    <li>Persistência de dados</li>
+    <li>Interface responsiva (mobile)</li>
+    <li>Integração com APIs externas (ex: WhatsApp)</li>
+</ul>
+
+<hr>
+
+<h2>📄 Licença</h2>
+<p>Este projeto está licenciado sob a Licença MIT.</p>
+
+<pre>
+MIT License
+
+Copyright (c) 2026
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</pre>
+
+<hr>
+
+<h2>📌 Como Executar</h2>
+<ol>
+    <li>Faça o download ou clone este repositório</li>
+    <li>Abra o arquivo <code>index.html</code> em seu navegador</li>
+    <li>Utilize o sistema localmente</li>
+</ol>
+
+</body>
+</html>
