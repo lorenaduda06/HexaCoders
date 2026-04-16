@@ -1,147 +1,70 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>BeautyFlow - README</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        h1, h2, h3 {
-            color: #333;
-        }
-        hr {
-            margin: 25px 0;
-        }
-        ul, ol {
-            margin-left: 20px;
-        }
-        pre {
-            background: #f4f4f4;
-            padding: 15px;
-            overflow-x: auto;
-        }
-    </style>
-</head>
-<body>
+# 💅 BeautyFlow
 
-<h1>💅 BeautyFlow</h1>
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-<p>
-    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License MIT">
-</p>
+---
 
-<hr>
+## 👨‍💻 Autores
 
-<h2>👨‍💻 Autores</h2>
+**HexaCoders**
 
-<strong>HexaCoders</strong>
-<p>Equipe:</p>
-<p>Caelayne Aparecida Ribeiro Soares</p>
-<p>Lauren Marçulo</p>
-<p>Lorena Eduarda Barros Martinelli</p>
-<p>Manuella Vieira Reginato</p>
-<p>Matheus Araújo de Oliveira</p>
-<p>Renan Cáceres Anselmo</p>
+Equipe:
 
-<h3>Disciplina: Desenvolvimento Ágil</h3>
-<p>Curso: Análise e Desenvolvimento de Sistemas - UTFPR</p>
-<p>2026/01</p>
+- Caelayne Aparecida Ribeiro Soares  
+- Lauren Marçulo  
+- Lorena Eduarda Barros Martinelli  
+- Manuella Vieira Reginato  
+- Matheus Araújo de Oliveira  
+- Renan Cáceres Anselmo  
 
-<hr>
+### Disciplina: Desenvolvimento Ágil  
+Curso: Análise e Desenvolvimento de Sistemas - UTFPR  
+2026/01  
 
-<h2>📌 Sobre o Projeto</h2>
-<p>
-O <strong>BeautyFlow</strong> é um sistema web desenvolvido para auxiliar na gestão de clínicas e espaços de estética.
-O projeto centraliza as principais operações do negócio, como agendamentos, controle de clientes, serviços e fluxo financeiro,
-em uma interface simples e intuitiva.
-</p>
+---
 
-<p>
-A aplicação foi construída como um protótipo funcional, com foco em organização, usabilidade e simulação de um sistema real.
-</p>
+## 📌 Sobre o Projeto
 
-<hr>
+O **BeautyFlow** é um sistema web desenvolvido para auxiliar na gestão de clínicas e espaços de estética.  
+Centraliza agendamentos, clientes, serviços e fluxo financeiro em uma interface simples e intuitiva.
 
-<h2>🚀 Funcionalidades</h2>
-<ul>
-    <li>Agendamento de clientes</li>
-    <li>Cadastro e gerenciamento de clientes</li>
-    <li>Gestão de serviços</li>
-    <li>Controle de retorno de clientes</li>
-    <li>Controle de consumo de produtos</li>
-    <li>Fluxo de caixa (entradas e saídas)</li>
-</ul>
+---
 
-<hr>
+## 🚀 Funcionalidades
 
-<h2>👤 Perfis de Usuário</h2>
-<ul>
-    <li><strong>Secretária:</strong> responsável por agendar atendimentos</li>
-    <li><strong>Colaborador:</strong> visualiza atendimentos e serviços a executar</li>
-    <li><strong>Gerente:</strong> supervisiona clientes e controle de insumos</li>
-    <li><strong>Dono:</strong> acompanha fluxo financeiro e desempenho geral</li>
-</ul>
+- Agendamento de clientes  
+- Cadastro de clientes  
+- Gestão de serviços  
+- Controle de retorno  
+- Controle de consumo  
+- Fluxo de caixa  
 
-<hr>
+---
 
-<h2>🖥️ Tecnologias Utilizadas</h2>
-<ul>
-    <li>HTML</li>
-    <li>CSS</li>
-    <li>JavaScript</li>
-</ul>
+## 👤 Perfis de Usuário
 
-<hr>
+- **Secretária:** agenda atendimentos  
+- **Colaborador:** executa serviços  
+- **Gerente:** controla clientes e insumos  
+- **Dono:** acompanha financeiro  
 
-<h2>🎯 Objetivo</h2>
-<p>
-O objetivo do projeto é demonstrar a estrutura de um sistema de gestão para estética, servindo como base para evolução futura
-com backend, banco de dados e autenticação de usuários.
-</p>
+---
 
-<hr>
+## 🖥️ Tecnologias
 
-<h2>🔮 Melhorias Futuras</h2>
-<ul>
-    <li>Integração com banco de dados</li>
-    <li>Sistema de login e autenticação</li>
-    <li>Persistência de dados</li>
-    <li>Interface responsiva (mobile)</li>
-    <li>Integração com APIs externas (ex: WhatsApp)</li>
-</ul>
+- HTML  
+- CSS  
+- JavaScript  
 
-<hr>
+---
 
-<h2>📄 Licença</h2>
-<p>Este projeto está licenciado sob a Licença MIT.</p>
+## 📄 Licença
 
-<pre>
-MIT License
+Este projeto está sob a licença MIT.
 
-Copyright (c) 2026
+---
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-...
-</pre>
+## 📌 Como Executar
 
-<hr>
-
-<h2>📌 Como Executar</h2>
-<ol>
-    <li>Faça o download ou clone este repositório</li>
-    <li>Abra o arquivo <code>index.html</code> em seu navegador</li>
-    <li>Utilize o sistema localmente</li>
-</ol>
-
-</body>
-</html>
+1. Baixe o projeto  
+2. Abra o arquivo `index.html` no navegador
