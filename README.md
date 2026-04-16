@@ -1,6 +1,5 @@
 # 💅 BeautyFlow
 
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ---
 
@@ -60,7 +59,7 @@ Centraliza agendamentos, clientes, serviços e fluxo financeiro em uma interface
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT.
+Este projeto está sob a licença MIT. ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ---
 
