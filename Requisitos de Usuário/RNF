@@ -1,1 +1,17 @@
+# 3. Requisitos Não Funcionais
 
+A Tabela 5 apresenta os Requisitos Não Funcionais do sistema BeautyFlow.
+
+| ID | Requisito Não Funcional | Descrição | Prioridade |
+|----|--------------------------|-----------|------------|
+| RNF01 | Usabilidade | O sistema deve possuir interface simples e intuitiva. | Alta |
+| RNF02 | Desempenho | O sistema deve responder rapidamente aos comandos do usuário. | Alta |
+| RNF03 | Responsividade | O sistema deve funcionar corretamente em celular, tablet e computador. | Média |
+| RNF04 | Segurança | O sistema deve possuir login e controle de acesso por perfil de usuário. | Alta |
+| RNF05 | Compatibilidade | O sistema deve funcionar nos principais navegadores atuais. | Média |
+| RNF06 | Manutenibilidade | O código deve ser organizado para facilitar futuras melhorias. | Média |
+| RNF07 | Disponibilidade | O sistema deve estar acessível durante o horário de funcionamento. | Média |
+
+<div align="center">
+Tabela 5: Requisitos Não Funcionais do BeautyFlow
+</div>
