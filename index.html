@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeautyFlow</title>
+
+    <!-- Vincule aqui o css -->
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <div class="container">
+
+        <!-- ====================== -->
+        <!--   MENU LATERAL         -->
+        <!-- ====================== -->
+    <div class="side-bar">
+        <div class="logo">
+        <div class="texto-logo">✿ BeautyFlow</div>
+        <div class="sub-logo">Estética Profissional</div>
+    </div>
+
+    <div class="nav-item ativo" onclick="navTela('agenda', this)">
+      <span class="nav-icone">📅</span> Agenda
+    </div>
+    <div class="nav-item" onclick="navTela('clientes', this)">
+      <span class="nav-icone">👥</span> Clientes
+    </div>
+    <div class="nav-item" onclick="navTela('servicos', this)">
+      <span class="nav-icone">✨</span> Serviços
+    </div>
+    <div class="nav-item" onclick="navTela('consumo', this)">
+      <span class="nav-icone">🛍️</span> Consumo
+    </div>
+    <div class="nav-item" onclick="navTela('caixa', this)">
+      <span class="nav-icone">📊</span> Fluxo de Caixa
+    </div>
+    <div class="nav-item" onclick="navTela('retorno', this)">
+      <span class="nav-icone">🔔</span> Retorno
+    </div>
+  </div>
+
+  <!-- ====================== -->
+  <!--   ÁREA PRINCIPAL       -->
+  <!-- ====================== -->
+  <div class="main">
+
+    <!-- ======================== -->
+    <!--   TELA: AGENDA           -->
+    <!-- ======================== -->
+    <div id="tela-agenda" class="tela ativa">
+      <div class="top-bar">
+        <div>
+          <div class="titulo">Agenda</div>
+          <div class="subtitulo" id="subtitulo-data">Carregando...</div>
+        </div>
+        <button class="bt-agendar" onclick="marcarData('agendar')">+ Novo Agendamento</button>
+      </div>
+
+      <div class="conteudo">
+
+        <!-- Navegação de datas -->
+        <div class="nav-data">
+          <button class="bt-seta" onclick="alternarData(-1)">‹</button>
+          <div class="lb-data-nav" id="lb-data-nav">—</div>
+          <button class="bt-seta" onclick="alternarData(+1)">›</button>
+          <button class="bt-cinza" onclick="agendarHoje()">Hoje</button>
+        </div>
+
+        <!-- Resumo do dia -->
+        <div class="cards-resumo" id="cards-resumo"></div>
+
+        <!-- Grade de horários -->
+        <div class="grade-agenda">
+          <div class="col-horas" id="col-horas"></div>
+          <div class="col-agendamentos" id="col-agendamentos"></div>
+        </div>
+
+        <!-- Aviso de baixa -->
+        <div class="finalizados-do-dia">
+          <strong>Baixa do dia</strong> — ao final de cada atendimento, clique no card para marcá-lo como
+          <span class="etiqueta etiqueta-verde">✓ realizado</span> ou
+          <span class="etiqueta etiqueta-vermelho">✕ cancelado</span>.
+        </div>
+
+      </div>
+    </div><!-- fim tela-agenda -->
+
+
+    <!-- ======================== -->
+    <!--   TELAS PLACEHOLDER      -->
+    <!-- ======================== -->
+    <div id="tela-clientes" class="tela">
+      <div class="top-bar"><div class="titulo">Clientes</div></div>
+      <div class="conteudo">
+        Esta tela é responsabilidade do Matheus.
+      </div>
+    </div>
+
+    <div id="tela-servicos" class="tela">
+      <div class="top-bar"><div class="titulo">Serviços</div></div>
+      <div class="conteudo">
+        Esta tela é responsabilidade da Caelayne.
+      </div>
+    </div>
+
+    <div id="tela-consumo" class="tela">
+      <div class="top-bar"><div class="titulo">Consumo</div></div>
+      <div class="conteudo">
+        Esta tela é responsabilidade da Caelayne.
+      </div>
+    </div>
+
+    <div id="tela-caixa" class="tela">
+      <div class="top-bar"><div class="titulo">Fluxo de Caixa</div></div>
+      <div class="conteudo">
+        Esta tela é responsabilidade do Matheus.
+      </div>
+    </div>
+
+
+    <!-- ======================== -->
+    <!--   TELA: RETORNO          -->
+    <!-- ======================== -->
+    <div id="tela-retorno" class="tela">
+      <div class="top-bar">
+        <div>
+          <div class="titulo">Retorno de Clientes</div>
+          <div class="subtitulo">Clientes que precisam ser contatados para remarcar</div>
+        </div>
+      </div>
+
+      <div class="conteudo">
+
+        <!-- Cards de resumo numérico -->
+        <div class="resumo-retorno">
+          <div class="card-resumo-retorno">
+            <div class="num-resumo" id="num-hoje">0</div>
+            <div class="lb-resumo">Retorno hoje</div>
+          </div>
+          <div class="card-resumo-retorno">
+            <div class="num-resumo" id="num-3dias">0</div>
+            <div class="lb-resumo">Em até 3 dias</div>
+          </div>
+          <div class="card-resumo-retorno">
+            <div class="num-resumo" id="num-7dias">0</div>
+            <div class="lb-resumo">Em até 7 dias</div>
+          </div>
+          <div class="card-resumo-retorno">
+            <div class="num-resumo" id="num-vencidas">0</div>
+            <div class="lb-resumo">Vencidas</div>
+          </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filtros">
+          <div class="filtro ativo" onclick="filtroRetorno('todas', this)">Todas</div>
+          <div class="filtro" onclick="filtroRetorno('hoje', this)">Hoje</div>
+          <div class="filtro" onclick="filtroRetorno('3dias', this)">Em 3 dias</div>
+          <div class="filtro" onclick="filtroRetorno('7dias', this)">Em 7 dias</div>
+          <div class="filtro" onclick="filtroRetorno('vencidas', this)">Vencidas</div>
+        </div>
+
+        <!-- Lista de clientes para retorno -->
+        <div id="lista-retorno"></div>
+
+      </div>
+    </div><!-- fim tela-retorno -->
+
+  </div><!-- fim .main -->
+</div><!-- fim .app -->
+
+
+<!-- ========================== -->
+<!--   MODAIS                   -->
+<!-- ========================== -->
+
+<!-- Modal: Novo Agendamento -->
+<div id="modal-agendar" class="fundo-modal" onclick="fecharJanela(event)">
+  <div class="modal">
+    <div class="titulo-modal">📅 Novo Agendamento</div>
+
+    <div class="campo">
+      <label class="lb-campo">Buscar cliente</label>
+      <input class="inp-campo" type="text" placeholder="Digite o nome..." oninput="autocomplete(this.value)" id="campo-cliente"/>
+      <div class="lista-autocomplete" id="lista-autocomplete" style="display:none;"></div>
+    </div>
+
+    <div class="campo">
+      <label class="lb-campo">Serviço</label>
+      <select class="inp-campo" id="sel-servico">
+        <option value="">Selecione um serviço...</option>
+        <option value="Limpeza de Pele">Limpeza de Pele — R$ 150,00</option>
+        <option value="Design de Sobrancelha">Design de Sobrancelha — R$ 50,00</option>
+        <option value="Peeling Químico">Peeling Químico — R$ 220,00</option>
+        <option value="Hidratação Facial">Hidratação Facial — R$ 120,00</option>
+      </select>
+    </div>
+
+    <div class="linha-campos">
+      <div class="campo">
+        <label class="label-campo">Data</label>
+        <input class="input-campo" type="date" id="input-data-ag"/>
+      </div>
+      <div class="campo">
+        <label class="lb-campo">Horário</label>
+        <select class="inp-campo" id="inp-hora-ag">
+          <option value="">--</option>
+          <option>08:00</option>
+          <option>09:00</option>
+          <option>10:00</option>
+          <option>11:00</option>
+          <option>12:00</option>
+          <option>13:00</option>
+          <option>14:00</option>
+          <option>15:00</option>
+          <option>16:00</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="rodape-modal">
+      <button class="bt-cinza" onclick="cancelarNovoAgendamento()">Cancelar</button>
+      <button class="bt-rosa" onclick="salvarAgendamento()">Agendar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Detalhe do Agendamento -->
+<div id="modal-detalhe" class="fundo-modal" style="display:none;" onclick="fecharJanela(event)">
+  <div class="modal">
+    <div class="titulo-modal">📋 Detalhes do Agendamento</div>
+
+    <div id="conteudo-detalhe"></div>
+
+    <div class="acoes-detalhe">
+      <button class="bt-verde" onclick="baixaAgendamento('realizado')">✓ Marcar como realizado</button>
+      <button class="bt-vermelho" onclick="baixaAgendamento('cancelado')">✕ Cancelar</button>
+      <button class="bt-cinza" onclick="fecharModais()" style="margin-left:auto;">Fechar</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
