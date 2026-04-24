@@ -1,1 +1,1556 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
 
+:root {
+  /* Paleta Rosa */
+  --rose-50:  #fff0f5;
+  --rose-100: #ffe0eb;
+  --rose-200: #ffc2d4;
+  --rose-300: #ff94b4;
+  --rose-400: #ff6b96;
+  --rose-500: #e84a7b;
+  --rose-600: #c73066;
+
+  /* Dourado */
+  --gold-300: #f0d080;
+  --gold-400: #d4a843;
+  --gold-500: #b8891e;
+
+  /* Neutros */
+  --branco:   #ffffff;
+  --cinza-50: #fafafa;
+  --cinza-100:#f5f5f5;
+  --cinza-200:#e8e8e8;
+  --cinza-400:#a0a0a0;
+  --cinza-600:#6b6b6b;
+  --cinza-800:#2d2d2d;
+  --preto:    #1a1a1a;
+
+  /* Semânticas (para compatibilidade com JS inline do HTML) */
+  --vermelho: #d93f0b;
+  --verde:    #2da44e;
+  --amarelo:  var(--gold-400);
+  --texto:    var(--preto);
+
+  /* Aliases do sistema de design */
+  --cor-fundo:         var(--rose-50);
+  --cor-superficie:    var(--branco);
+  --cor-primaria:      var(--rose-400);
+  --cor-primaria-hover:var(--rose-500);
+  --cor-primaria-ativa:var(--rose-600);
+  --cor-destaque:      var(--gold-400);
+  --cor-texto:         var(--preto);
+  --cor-texto-suave:   var(--cinza-600);
+  --cor-borda:         var(--rose-200);
+  --cor-borda-foco:    var(--rose-400);
+
+  /* Tipografia */
+  --fonte-display: 'Playfair Display', Georgia, serif;
+  --fonte-corpo:   'DM Sans', 'Segoe UI', sans-serif;
+
+  /* Espaçamentos */
+  --s1: 4px;   --s2: 8px;   --s3: 12px;  --s4: 16px;
+  --s5: 20px;  --s6: 24px;  --s8: 32px;  --s10: 40px;
+
+  /* Bordas */
+  --r-sm:   6px;
+  --r-md:   12px;
+  --r-lg:   20px;
+  --r-xl:   28px;
+  --r-full: 9999px;
+
+  /* Sombras */
+  --sombra-sm: 0 1px 4px rgba(232, 74, 123, 0.08);
+  --sombra-md: 0 4px 16px rgba(232, 74, 123, 0.12);
+  --sombra-lg: 0 8px 32px rgba(232, 74, 123, 0.18);
+
+  /* Transições */
+  --t-rapido: 150ms ease;
+  --t-base:   250ms ease;
+}
+
+/* ─────────────────────────────────────────
+   2. RESET & BASE
+───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--fonte-corpo);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+  background-image:
+    radial-gradient(ellipse at 15% 8%, rgba(255, 148, 180, 0.14) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 92%, rgba(212, 168, 67, 0.07) 0%, transparent 45%);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--fonte-display);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+a {
+  color: var(--cor-primaria);
+  text-decoration: none;
+  transition: color var(--t-rapido);
+}
+
+ul, ol { list-style: none; }
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+::selection {
+  background: var(--rose-200);
+  color: var(--rose-600);
+}
+
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: var(--rose-50); }
+::-webkit-scrollbar-thumb  { background: var(--rose-300); border-radius: var(--r-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--rose-400); }
+
+
+/* ─────────────────────────────────────────
+   3. LAYOUT PRINCIPAL — .container
+───────────────────────────────────────── */
+
+/* Wrapper global: sidebar + main lado a lado */
+.container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+
+/* ─────────────────────────────────────────
+   4. SIDEBAR — .side-bar
+───────────────────────────────────────── */
+
+.side-bar {
+  width: 240px;
+  min-height: 100vh;
+  background: var(--branco);
+  border-right: 1px solid var(--cor-borda);
+  display: flex;
+  flex-direction: column;
+  padding: var(--s8) var(--s4) var(--s6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  box-shadow: var(--sombra-md);
+  z-index: 100;
+  overflow-y: auto;
+}
+
+/* Logo */
+.logo {
+  text-align: center;
+  padding-bottom: var(--s6);
+  margin-bottom: var(--s6);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.texto-logo {
+  font-family: var(--fonte-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--rose-500);
+  letter-spacing: 0.01em;
+}
+
+.sub-logo {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--cor-texto-suave);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: var(--s1);
+}
+
+/* Itens de navegação */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: var(--s3) var(--s4);
+  border-radius: var(--r-md);
+  color: var(--cor-texto-suave);
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition:
+    background var(--t-rapido),
+    color var(--t-rapido),
+    transform var(--t-rapido);
+  margin-bottom: var(--s1);
+  border: none;
+  background: none;
+  user-select: none;
+}
+
+.nav-item:hover {
+  background: var(--rose-50);
+  color: var(--rose-500);
+  transform: translateX(3px);
+}
+
+.nav-item.ativo {
+  background: linear-gradient(135deg, var(--rose-100), var(--rose-50));
+  color: var(--rose-500);
+  font-weight: 600;
+  box-shadow: var(--sombra-sm);
+  border-left: 3px solid var(--rose-400);
+}
+
+.nav-icone {
+  font-size: 18px;
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+
+/* ─────────────────────────────────────────
+   5. ÁREA PRINCIPAL — .main e .tela
+───────────────────────────────────────── */
+
+.main {
+  flex: 1;
+  margin-left: 240px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Telas: ocultas por padrão, visíveis quando .ativa */
+.tela {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  animation: fadeIn 280ms ease;
+}
+
+.tela.ativa {
+  display: flex;
+}
+
+/* Conteúdo rolável dentro da tela */
+.conteudo {
+  padding: var(--s6) var(--s8) var(--s8);
+  flex: 1;
+  overflow-y: auto;
+}
+
+
+/* ─────────────────────────────────────────
+   6. TOP BAR — .top-bar
+───────────────────────────────────────── */
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--s5) var(--s8);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--cor-borda);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  gap: var(--s4);
+  flex-wrap: wrap;
+}
+
+.titulo,
+.titulo-pagina {
+  font-family: var(--fonte-display);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--cor-texto);
+  line-height: 1.2;
+}
+
+.subtitulo {
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+  margin-top: 2px;
+}
+
+
+/* ─────────────────────────────────────────
+   7. BOTÕES
+───────────────────────────────────────── */
+
+/* Base comum */
+.bt-rosa,
+.bt-agendar,
+.bt-cinza,
+.bt-verde,
+.bt-vermelho,
+.bt-seta,
+.bt-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  font-family: var(--fonte-corpo);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  border-radius: var(--r-full);
+  transition:
+    background var(--t-rapido),
+    box-shadow var(--t-rapido),
+    transform var(--t-rapido),
+    color var(--t-rapido);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+/* Botão rosa principal */
+.bt-rosa,
+.bt-agendar {
+  background: linear-gradient(135deg, var(--rose-400), var(--rose-500));
+  color: var(--branco);
+  padding: 10px var(--s5);
+  box-shadow: 0 2px 12px rgba(232, 74, 123, 0.35);
+}
+
+.bt-rosa:hover,
+.bt-agendar:hover {
+  background: linear-gradient(135deg, var(--rose-500), var(--rose-600));
+  box-shadow: 0 4px 20px rgba(232, 74, 123, 0.45);
+  transform: translateY(-1px);
+}
+
+.bt-rosa:active,
+.bt-agendar:active {
+  background: var(--rose-600);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.2);
+  transform: scale(0.97);
+}
+
+/* Botão cinza / secundário */
+.bt-cinza {
+  background: var(--cinza-100);
+  color: var(--cinza-800);
+  padding: 10px var(--s5);
+  border: 1.5px solid var(--cinza-200);
+}
+
+.bt-cinza:hover {
+  background: var(--cinza-200);
+  border-color: var(--cinza-400);
+  transform: translateY(-1px);
+}
+
+.bt-cinza:active {
+  transform: scale(0.97);
+}
+
+/* Botão verde — marcar como realizado */
+.bt-verde {
+  background: linear-gradient(135deg, #34d058, #2da44e);
+  color: var(--branco);
+  padding: 10px var(--s5);
+  box-shadow: 0 2px 10px rgba(45, 164, 78, 0.3);
+}
+
+.bt-verde:hover {
+  background: linear-gradient(135deg, #2da44e, #1f7a38);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(45, 164, 78, 0.4);
+}
+
+.bt-verde:active {
+  transform: scale(0.97);
+}
+
+/* Botão vermelho — cancelar */
+.bt-vermelho {
+  background: linear-gradient(135deg, #f85149, #d93f0b);
+  color: var(--branco);
+  padding: 10px var(--s5);
+  box-shadow: 0 2px 10px rgba(217, 63, 11, 0.3);
+}
+
+.bt-vermelho:hover {
+  background: linear-gradient(135deg, #d93f0b, #b33000);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(217, 63, 11, 0.4);
+}
+
+.bt-vermelho:active {
+  transform: scale(0.97);
+}
+
+/* Botão seta (navegação de data/mês) */
+.bt-seta {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: var(--r-full);
+  background: var(--branco);
+  color: var(--rose-400);
+  font-size: 20px;
+  border: 1.5px solid var(--cor-borda);
+  box-shadow: var(--sombra-sm);
+}
+
+.bt-seta:hover {
+  background: var(--rose-50);
+  border-color: var(--rose-300);
+  color: var(--rose-500);
+  transform: scale(1.08);
+}
+
+/* Botão ícone (tabela de clientes) */
+.bt-icone {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: var(--r-md);
+  background: var(--rose-50);
+  color: var(--rose-500);
+  font-size: 15px;
+  border: 1px solid var(--rose-200);
+  margin: 0 2px;
+}
+
+.bt-icone:hover {
+  background: var(--rose-100);
+  border-color: var(--rose-300);
+  transform: scale(1.08);
+}
+
+
+/* ─────────────────────────────────────────
+   8. AGENDA — Navegação de Data
+───────────────────────────────────────── */
+
+.nav-data {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  margin-bottom: var(--s5);
+  flex-wrap: wrap;
+}
+
+.lb-data-nav {
+  font-family: var(--fonte-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--cor-texto);
+  min-width: 160px;
+  text-align: center;
+}
+
+
+/* ─────────────────────────────────────────
+   9. AGENDA — Cards de Resumo do Dia
+───────────────────────────────────────── */
+
+.cards-resumo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--s4);
+  margin-bottom: var(--s6);
+}
+
+/* Cards gerados pelo JS (card-resumo) */
+.card-resumo {
+  background: var(--branco);
+  border-radius: var(--r-lg);
+  padding: var(--s5) var(--s6);
+  box-shadow: var(--sombra-md);
+  border: 1px solid rgba(255, 148, 180, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  transition: box-shadow var(--t-base), transform var(--t-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-resumo::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rose-300), var(--rose-500), var(--gold-400));
+  opacity: 0;
+  transition: opacity var(--t-base);
+}
+
+.card-resumo:hover {
+  box-shadow: var(--sombra-lg);
+  transform: translateY(-2px);
+}
+
+.card-resumo:hover::before {
+  opacity: 1;
+}
+
+/* Número grande do card */
+.num-card {
+  font-family: var(--fonte-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--rose-500);
+  line-height: 1;
+}
+
+/* Label do card */
+.lb-card {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+
+/* ─────────────────────────────────────────
+   10. AGENDA — Grade de Horários
+───────────────────────────────────────── */
+
+.grade-agenda {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 0;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--branco);
+  box-shadow: var(--sombra-md);
+  margin-bottom: var(--s6);
+}
+
+/* Coluna de horas */
+.col-horas {
+  background: linear-gradient(180deg, var(--rose-50) 0%, var(--branco) 100%);
+  border-right: 1px solid var(--cor-borda);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cada célula de hora (gerada pelo JS) */
+.hora {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--rose-400);
+  border-bottom: 1px solid var(--rose-50);
+  letter-spacing: 0.04em;
+}
+
+/* Coluna de agendamentos */
+.col-agendamentos {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 512px; /* 8 horas × 64px */
+}
+
+/* Linha divisória por hora */
+.linha-hora {
+  height: 64px;
+  border-bottom: 1px solid var(--rose-50);
+  position: relative;
+}
+
+/* Card de agendamento na grade (gerado pelo JS) */
+.card-ag {
+  position: absolute;
+  left: var(--s2);
+  right: var(--s2);
+  border-radius: var(--r-md);
+  padding: var(--s2) var(--s3);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--sombra-sm);
+  border-left: 3px solid var(--rose-400);
+  background: linear-gradient(135deg, var(--rose-100), var(--rose-50));
+  color: var(--cor-texto);
+  transition: box-shadow var(--t-rapido), transform var(--t-rapido);
+  z-index: 1;
+  min-height: 54px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
+
+.card-ag:hover {
+  box-shadow: var(--sombra-md);
+  transform: translateX(2px);
+}
+
+.card-ag.realizado {
+  background: linear-gradient(135deg, #dcfce7, #f0fdf4);
+  border-left-color: var(--verde);
+  opacity: 0.8;
+}
+
+.card-ag.cancelado {
+  background: linear-gradient(135deg, #fee2e2, #fff5f5);
+  border-left-color: var(--vermelho);
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.ag-nome {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--cor-texto);
+}
+
+.ag-servico {
+  font-size: 12px;
+  color: var(--cor-texto-suave);
+}
+
+.ag-hora {
+  font-size: 11px;
+  color: var(--rose-500);
+  font-weight: 600;
+}
+
+
+/* ─────────────────────────────────────────
+   11. AGENDA — Aviso de Baixa do Dia
+───────────────────────────────────────── */
+
+.finalizados-do-dia {
+  background: var(--branco);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--r-md);
+  padding: var(--s4) var(--s5);
+  font-size: 13px;
+  color: var(--cor-texto-suave);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  box-shadow: var(--sombra-sm);
+}
+
+/* Etiquetas de status */
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px var(--s3);
+  border-radius: var(--r-full);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.etiqueta-verde {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.etiqueta-vermelho {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+
+/* ─────────────────────────────────────────
+   12. CLIENTES — Barra de busca e tabela
+───────────────────────────────────────── */
+
+.barra-busca {
+  margin-bottom: var(--s5);
+}
+
+/* Input de busca e campos de formulário */
+.inp-campo,
+.input-campo {
+  width: 100%;
+  padding: 10px var(--s4);
+  font-size: 14px;
+  color: var(--cor-texto);
+  background: var(--branco);
+  border: 1.5px solid var(--cor-borda);
+  border-radius: var(--r-md);
+  outline: none;
+  transition:
+    border-color var(--t-rapido),
+    box-shadow var(--t-rapido),
+    background var(--t-rapido);
+  line-height: 1.5;
+}
+
+.inp-campo::placeholder,
+.input-campo::placeholder {
+  color: var(--cinza-400);
+}
+
+.inp-campo:hover,
+.input-campo:hover {
+  border-color: var(--rose-300);
+}
+
+.inp-campo:focus,
+.input-campo:focus {
+  border-color: var(--cor-borda-foco);
+  box-shadow: 0 0 0 3px rgba(255, 107, 150, 0.15);
+  background: var(--rose-50);
+}
+
+/* Tabela de clientes */
+.tabela-estilizada {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: var(--branco);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--sombra-md);
+  border: 1px solid var(--cor-borda);
+}
+
+.tabela-estilizada thead {
+  background: linear-gradient(135deg, var(--rose-50), var(--branco));
+  border-bottom: 2px solid var(--rose-200);
+}
+
+.tabela-estilizada thead th {
+  padding: var(--s4) var(--s5);
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--rose-500);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.tabela-estilizada tbody tr {
+  border-bottom: 1px solid var(--cinza-100);
+  transition: background var(--t-rapido);
+}
+
+.tabela-estilizada tbody tr:last-child {
+  border-bottom: none;
+}
+
+.tabela-estilizada tbody tr:hover {
+  background: var(--rose-50);
+}
+
+.tabela-estilizada tbody td {
+  padding: var(--s4) var(--s5);
+  color: var(--cor-texto);
+  vertical-align: middle;
+}
+
+
+/* ─────────────────────────────────────────
+   13. SERVIÇOS — Resumo e Grid de Cards
+───────────────────────────────────────── */
+
+.resumo-servicos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--s4);
+  margin-bottom: var(--s6);
+}
+
+.card-resumo-serv {
+  background: var(--branco);
+  border-radius: var(--r-lg);
+  padding: var(--s5) var(--s6);
+  box-shadow: var(--sombra-md);
+  border: 1px solid rgba(255, 148, 180, 0.14);
+  text-align: center;
+  transition: box-shadow var(--t-base), transform var(--t-base);
+}
+
+.card-resumo-serv:hover {
+  box-shadow: var(--sombra-lg);
+  transform: translateY(-2px);
+}
+
+.num-resumo-serv {
+  font-family: var(--fonte-display);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--rose-500);
+  line-height: 1.1;
+}
+
+.lb-resumo-serv {
+  font-size: 12px;
+  color: var(--cor-texto-suave);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-top: var(--s1);
+}
+
+/* Grid de cards de serviços */
+.grid-servicos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--s5);
+}
+
+/* Card individual de serviço (gerado pelo JS) */
+.card-servico {
+  background: var(--branco);
+  border-radius: var(--r-lg);
+  padding: var(--s5);
+  box-shadow: var(--sombra-md);
+  border: 1.5px solid var(--cor-borda);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  transition: box-shadow var(--t-base), transform var(--t-base), border-color var(--t-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-servico::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rose-300), var(--rose-500));
+}
+
+.card-servico:hover {
+  box-shadow: var(--sombra-lg);
+  transform: translateY(-3px);
+  border-color: var(--rose-300);
+}
+
+.card-servico-icone {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.card-servico-nome {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--cor-texto);
+}
+
+.card-servico-valor {
+  font-family: var(--fonte-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--rose-500);
+}
+
+.card-servico-retorno {
+  font-size: 12px;
+  color: var(--cor-texto-suave);
+}
+
+.card-servico-acoes {
+  display: flex;
+  gap: var(--s2);
+  margin-top: auto;
+}
+
+
+/* ─────────────────────────────────────────
+   14. CONSUMO — Navegação de Mês e Resumo
+───────────────────────────────────────── */
+
+.nav-mes {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  margin-bottom: var(--s5);
+}
+
+.lb-mes-nav {
+  font-family: var(--fonte-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--cor-texto);
+  min-width: 180px;
+  text-align: center;
+}
+
+.resumo-consumo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--s4);
+  margin-bottom: var(--s6);
+}
+
+.card-resumo-cons {
+  background: var(--branco);
+  border-radius: var(--r-lg);
+  padding: var(--s5) var(--s6);
+  box-shadow: var(--sombra-md);
+  border: 1px solid rgba(255, 148, 180, 0.14);
+  transition: box-shadow var(--t-base), transform var(--t-base);
+}
+
+.card-resumo-cons:hover {
+  box-shadow: var(--sombra-lg);
+  transform: translateY(-2px);
+}
+
+.lb-resumo-cons {
+  font-size: 12px;
+  color: var(--cor-texto-suave);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: var(--s2);
+}
+
+.num-resumo-cons {
+  font-family: var(--fonte-display);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* Busca de consumo */
+.busca {
+  margin-bottom: var(--s4);
+}
+
+.busca input {
+  width: 100%;
+  padding: 10px var(--s4);
+  font-size: 14px;
+  color: var(--cor-texto);
+  background: var(--branco);
+  border: 1.5px solid var(--cor-borda);
+  border-radius: var(--r-md);
+  outline: none;
+  transition: border-color var(--t-rapido), box-shadow var(--t-rapido);
+}
+
+.busca input::placeholder { color: var(--cinza-400); }
+.busca input:focus {
+  border-color: var(--cor-borda-foco);
+  box-shadow: 0 0 0 3px rgba(255, 107, 150, 0.15);
+}
+
+/* Tabela de consumo */
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: var(--branco);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--sombra-md);
+  border: 1px solid var(--cor-borda);
+}
+
+.tabela thead {
+  background: linear-gradient(135deg, var(--rose-50), var(--branco));
+  border-bottom: 2px solid var(--rose-200);
+}
+
+.tabela thead th {
+  padding: var(--s4) var(--s5);
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--rose-500);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.tabela tbody tr {
+  border-bottom: 1px solid var(--cinza-100);
+  transition: background var(--t-rapido);
+}
+
+.tabela tbody tr:last-child { border-bottom: none; }
+.tabela tbody tr:hover      { background: var(--rose-50); }
+
+.tabela tbody td {
+  padding: var(--s4) var(--s5);
+  color: var(--cor-texto);
+  vertical-align: middle;
+}
+
+/* Mensagem de lista vazia */
+.msg-vazia {
+  text-align: center;
+  padding: var(--s10) var(--s8);
+  color: var(--cor-texto-suave);
+  font-size: 14px;
+}
+
+.msg-vazia-icone {
+  font-size: 40px;
+  margin-bottom: var(--s4);
+  opacity: 0.5;
+}
+
+
+/* ─────────────────────────────────────────
+   15. FLUXO DE CAIXA
+───────────────────────────────────────── */
+
+.cards-financeiro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--s5);
+  margin-bottom: var(--s8);
+}
+
+.card-fin {
+  background: var(--branco);
+  border-radius: var(--r-lg);
+  padding: var(--s6);
+  box-shadow: var(--sombra-md);
+  border: 1px solid rgba(255, 148, 180, 0.14);
+  transition: box-shadow var(--t-base), transform var(--t-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-fin::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+
+.card-fin.entrada::before { background: linear-gradient(90deg, #34d058, #2da44e); }
+.card-fin.saida::before   { background: linear-gradient(90deg, #f85149, #d93f0b); }
+.card-fin.saldo::before   { background: linear-gradient(90deg, var(--gold-300), var(--gold-400)); }
+
+.card-fin:hover {
+  box-shadow: var(--sombra-lg);
+  transform: translateY(-2px);
+}
+
+.lb-fin {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: var(--s3);
+}
+
+.vlr-fin {
+  font-family: var(--fonte-display);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--cor-texto);
+}
+
+.card-fin.entrada .vlr-fin { color: var(--verde); }
+.card-fin.saida   .vlr-fin { color: var(--vermelho); }
+.card-fin.saldo   .vlr-fin { color: var(--gold-500); }
+
+/* Seção de extrato */
+.secao-extrato {
+  background: var(--branco);
+  border-radius: var(--r-lg);
+  padding: var(--s6);
+  box-shadow: var(--sombra-md);
+  border: 1px solid var(--cor-borda);
+}
+
+.titulo-secao {
+  font-family: var(--fonte-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--cor-texto);
+  margin-bottom: var(--s5);
+  padding-bottom: var(--s4);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.lista-movimentos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+.item-mov {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--s3) var(--s4);
+  border-radius: var(--r-md);
+  font-size: 14px;
+  background: var(--cinza-50);
+  border: 1px solid var(--cinza-100);
+  transition: background var(--t-rapido);
+  gap: var(--s4);
+}
+
+.item-mov:hover {
+  background: var(--rose-50);
+  border-color: var(--rose-200);
+}
+
+.vlr-positivo {
+  font-weight: 700;
+  color: var(--verde);
+  white-space: nowrap;
+}
+
+.vlr-negativo {
+  font-weight: 700;
+  color: var(--vermelho);
+  white-space: nowrap;
+}
+
+
+/* ─────────────────────────────────────────
+   16. RETORNO DE CLIENTES
+───────────────────────────────────────── */
+
+.resumo-retorno {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--s4);
+  margin-bottom: var(--s6);
+}
+
+.card-resumo-retorno {
+  background: var(--branco);
+  border-radius: var(--r-lg);
+  padding: var(--s5) var(--s6);
+  box-shadow: var(--sombra-md);
+  border: 1px solid rgba(255, 148, 180, 0.14);
+  text-align: center;
+  transition: box-shadow var(--t-base), transform var(--t-base);
+}
+
+.card-resumo-retorno:hover {
+  box-shadow: var(--sombra-lg);
+  transform: translateY(-2px);
+}
+
+.num-resumo {
+  font-family: var(--fonte-display);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--rose-500);
+  line-height: 1;
+}
+
+.lb-resumo {
+  font-size: 12px;
+  color: var(--cor-texto-suave);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-top: var(--s2);
+}
+
+/* Filtros de retorno */
+.filtros {
+  display: flex;
+  gap: var(--s2);
+  flex-wrap: wrap;
+  margin-bottom: var(--s5);
+}
+
+.filtro {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px var(--s4);
+  border-radius: var(--r-full);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--t-rapido);
+  background: var(--branco);
+  color: var(--cor-texto-suave);
+  border: 1.5px solid var(--cor-borda);
+  user-select: none;
+}
+
+.filtro:hover {
+  background: var(--rose-50);
+  border-color: var(--rose-300);
+  color: var(--rose-500);
+}
+
+.filtro.ativo {
+  background: var(--rose-400);
+  color: var(--branco);
+  border-color: var(--rose-400);
+  box-shadow: 0 2px 10px rgba(232, 74, 123, 0.3);
+}
+
+/* Lista de retorno (cards gerados pelo JS) */
+#lista-retorno {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+.card-retorno {
+  background: var(--branco);
+  border-radius: var(--r-lg);
+  padding: var(--s4) var(--s5);
+  border: 1px solid var(--cor-borda);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--s3);
+  box-shadow: var(--sombra-sm);
+  transition: box-shadow var(--t-base), transform var(--t-base);
+}
+
+.card-retorno:hover {
+  box-shadow: var(--sombra-md);
+  transform: translateY(-1px);
+  border-color: var(--rose-300);
+}
+
+.card-retorno.vencido {
+  border-left: 4px solid var(--vermelho);
+  background: #fff9f9;
+}
+
+.card-retorno.hoje {
+  border-left: 4px solid var(--rose-400);
+  background: var(--rose-50);
+}
+
+.card-retorno-nome {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.card-retorno-info {
+  font-size: 12px;
+  color: var(--cor-texto-suave);
+  margin-top: 2px;
+}
+
+
+/* ─────────────────────────────────────────
+   17. MODAIS — .fundo-modal e .modal
+───────────────────────────────────────── */
+
+.fundo-modal {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 26, 26, 0.5);
+  backdrop-filter: blur(5px);
+  align-items: center;
+  justify-content: center;
+  padding: var(--s4);
+  z-index: 200;
+  animation: fadeIn 200ms ease;
+}
+
+/* Quando o JS usa display:none para ocultar */
+.fundo-modal[style*="display:none"],
+.fundo-modal[style*="display: none"] {
+  display: none !important;
+}
+
+.modal {
+  background: var(--branco);
+  border-radius: var(--r-xl);
+  padding: var(--s8);
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 24px 64px rgba(232, 74, 123, 0.22);
+  animation: slideUp 260ms ease;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.titulo-modal {
+  font-family: var(--fonte-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--cor-texto);
+  margin-bottom: var(--s6);
+  padding-bottom: var(--s4);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+/* Campos do modal */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  margin-bottom: var(--s4);
+  position: relative;
+}
+
+.lb-campo,
+.label-campo {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cinza-800);
+  letter-spacing: 0.01em;
+}
+
+/* Linha de dois campos lado a lado */
+.linha-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s4);
+  margin-bottom: var(--s4);
+}
+
+/* Rodapé do modal (botões) */
+.rodape-modal {
+  display: flex;
+  gap: var(--s3);
+  justify-content: flex-end;
+  margin-top: var(--s6);
+  padding-top: var(--s5);
+  border-top: 1px solid var(--cor-borda);
+}
+
+/* Ações do modal de detalhe */
+.acoes-detalhe {
+  display: flex;
+  gap: var(--s3);
+  flex-wrap: wrap;
+  margin-top: var(--s6);
+  padding-top: var(--s5);
+  border-top: 1px solid var(--cor-borda);
+}
+
+/* Autocomplete */
+.lista-autocomplete {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--branco);
+  border: 1.5px solid var(--cor-borda-foco);
+  border-radius: var(--r-md);
+  box-shadow: var(--sombra-lg);
+  z-index: 300;
+  overflow: hidden;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.item-autocomplete {
+  padding: 10px var(--s4);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background var(--t-rapido);
+  color: var(--cor-texto);
+}
+
+.item-autocomplete:hover {
+  background: var(--rose-50);
+  color: var(--rose-500);
+}
+
+/* Conteúdo do modal de detalhe */
+#conteudo-detalhe {
+  font-size: 14px;
+  color: var(--cor-texto);
+  line-height: 1.7;
+}
+
+#conteudo-detalhe p {
+  margin-bottom: var(--s2);
+}
+
+#conteudo-detalhe strong {
+  color: var(--rose-500);
+}
+
+
+/* ─────────────────────────────────────────
+   18. ANIMAÇÕES
+───────────────────────────────────────── */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* ─────────────────────────────────────────
+   19. RESPONSIVIDADE
+───────────────────────────────────────── */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .side-bar {
+    width: 200px;
+  }
+
+  .main {
+    margin-left: 200px;
+  }
+
+  .conteudo {
+    padding: var(--s5) var(--s6) var(--s8);
+  }
+
+  .top-bar {
+    padding: var(--s4) var(--s6);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .side-bar {
+    width: 100%;
+    min-height: auto;
+    position: relative;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: var(--s3) var(--s4);
+    border-right: none;
+    border-bottom: 1px solid var(--cor-borda);
+    gap: var(--s2);
+    align-items: center;
+  }
+
+  .logo {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+    margin-right: var(--s4);
+  }
+
+  .sub-logo { display: none; }
+
+  .nav-item {
+    padding: var(--s2) var(--s3);
+    font-size: 12px;
+    border-left: none !important;
+  }
+
+  .nav-item.ativo {
+    border-left: none;
+    border-bottom: 2px solid var(--rose-400);
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .conteudo {
+    padding: var(--s4);
+  }
+
+  .top-bar {
+    padding: var(--s3) var(--s4);
+    flex-wrap: wrap;
+    gap: var(--s3);
+  }
+
+  .titulo, .titulo-pagina {
+    font-size: 20px;
+  }
+
+  .grade-agenda {
+    grid-template-columns: 48px 1fr;
+  }
+
+  .hora {
+    font-size: 10px;
+  }
+
+  .linha-campos {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    padding: var(--s5);
+    border-radius: var(--r-lg);
+    max-height: 85vh;
+  }
+
+  .acoes-detalhe,
+  .rodape-modal {
+    flex-direction: column;
+  }
+
+  .bt-rosa,
+  .bt-agendar,
+  .bt-cinza,
+  .bt-verde,
+  .bt-vermelho {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .filtros {
+    gap: var(--s1);
+  }
+
+  .filtro {
+    font-size: 12px;
+    padding: 5px var(--s3);
+  }
+}
+
+/* Mobile pequeno */
+@media (max-width: 480px) {
+  .resumo-servicos,
+  .resumo-consumo,
+  .resumo-retorno,
+  .cards-resumo,
+  .cards-financeiro {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .num-resumo      { font-size: 24px; }
+  .num-resumo-serv { font-size: 20px; }
+  .vlr-fin         { font-size: 20px; }
+}
