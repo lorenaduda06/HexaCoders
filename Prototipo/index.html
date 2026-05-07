@@ -341,9 +341,28 @@ realizado</button>
 <button class="bt-vermelho" onclick="baixaAgendamento('cancelado')">✕
 Cancelar</button>
 <button class="bt-cinza" onclick="fecharModais()">Fechar</button>
-</div>
+</div>  
 </div>
 </div><!-- fim modal-detalhe -->
+  <div id="modal-cliente" class="fundo-modal" style="display:none;"
+onclick="fecharJanela(event)">
+  <div class="modal">
+    <div class="titulo-modal" id="titulo-modal-cliente">👤 Novo Cliente</div>
+    <div class="campo">
+      <label class="label-campo">Nome completo</label>
+      <input class="input-campo" type="text" id="inp-cliente-nome" placeholder="Ex: Ana Paula Silva" />
+    </div>
+    <div class="campo">
+      <label class="label-campo">Telefone</label>
+      <input class="input-campo" type="text" id="inp-cliente-telefone" placeholder="Ex: (43) 99123-4567" />
+    </div>
+    <input type="hidden" id="inp-cliente-id" value="" />
+    <div class="rodape-modal">
+      <button class="bt-cinza" onclick="fecharModais()">Cancelar</button>
+      <button class="bt-rosa" onclick="salvarCliente()">Salvar</button>
+    </div>
+  </div>
+</div>
 <!-- Modal: Novo Serviço -->
 <div id="modal-servico" class="fundo-modal" style="display:none;"
 onclick="fecharJanela(event)">
