@@ -1,467 +1,411 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeautyFlow</title>
-    <link rel="stylesheet" href="beautyflow.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeautyFlow</title>
+<link rel="stylesheet" href="beautyflow.css">
 </head>
 <body>
-    <div class="container">
-
-      <!-- ====================== -->
-      <!--   MENU LATERAL         -->
-      <!-- ====================== -->
-      <div class="side-bar">
-        <div class="logo">
-          <div class="texto-logo">✿ BeautyFlow</div>
-          <div class="sub-logo">Estética Profissional</div>
-        </div>
-
-        <div class="nav-item ativo" onclick="irParaTela('agenda', this)">
-          <span class="nav-icone">📅</span> Agenda
-        </div>
-        <div class="nav-item" onclick="irParaTela('clientes', this)">
-          <span class="nav-icone">👥</span> Clientes
-        </div>
-        <div class="nav-item" onclick="irParaTela('servicos', this)">
-          <span class="nav-icone">✨</span> Serviços
-        </div>
-        <div class="nav-item" onclick="irParaTela('consumo', this)">
-          <span class="nav-icone">🛍️</span> Consumo
-        </div>
-        <div class="nav-item" onclick="irParaTela('caixa', this)">
-          <span class="nav-icone">📊</span> Fluxo de Caixa
-        </div>
-        <div class="nav-item" onclick="irParaTela('retorno', this)">
-          <span class="nav-icone">🔔</span> Retorno
-        </div>
-      </div>
-
-      <!-- ====================== -->
-      <!--   ÁREA PRINCIPAL       -->
-      <!-- ====================== -->
-      <div class="main">
-
-        <!-- ======================== -->
-        <!--   TELA: AGENDA           -->
-        <!-- ======================== -->
-        <div id="tela-agenda" class="tela ativa">
-          <div class="top-bar">
-            <div>
-              <div class="titulo">Agenda</div>
-              <div class="subtitulo" id="subtitulo-data">Carregando...</div>
-            </div>
-            <button class="bt-rosa" onclick="marcarData('agendar')">+ Novo Agendamento</button>
-          </div>
-
-          <div class="conteudo">
-
-            <!-- Navegação de datas -->
-            <div class="nav-data">
-              <button class="bt-seta" onclick="alternarData(-1)">‹</button>
-              <div class="lb-data-nav" id="lb-data-nav">—</div>
-              <button class="bt-seta" onclick="alternarData(+1)">›</button>
-              <button class="bt-cinza" onclick="agendarHoje()">Hoje</button>
-            </div>
-
-            <!-- Resumo do dia -->
-            <div class="cards-resumo" id="cards-resumo"></div>
-
-            <!-- Grade de horários -->
-            <div class="grade-agenda">
-              <div class="col-horas" id="col-horas"></div>
-              <div class="col-agendamentos" id="col-agendamentos"></div>
-            </div>
-
-            <!-- Aviso de baixa -->
-            <div class="finalizados-do-dia">
-              <strong>Baixa do dia</strong> — ao final de cada atendimento, clique no card para marcá-lo como 
-              <span class="etiqueta etiqueta-verde">✓ realizado</span> ou 
-              <span class="etiqueta etiqueta-vermelho">✕ cancelado</span>.
-            </div>
-
-          </div>
-        </div> <!-- fim tela-agenda -->
-
-        <!-- ======================== -->
-        <!--   TELA: CLIENTES         -->
-        <!-- ======================== -->
-    
-        <div id="tela-clientes" class="tela">
-          <div class="top-bar">
-            <div>
-              <div class="titulo">Clientes</div>
-              <div class="subtitulo">Gerenciamento de fichas e contatos</div>
-            </div>
-            <button class="bt-agendar" onclick="abrirModal('cliente')">+ Novo Cliente</button>
-          </div>
-      
-          <div class="conteudo">
-            <div class="barra-busca">
-              <input type="text" class="inp-campo" placeholder="🔍 Buscar por nome ou telefone..." id="busca-cliente">
-            </div>
-
-            <table class="tabela-estilizada">
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Telefone</th>
-                  <th>Último Procedimento</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              <tbody id="lista-clientes-corpo">
-                <tr>
-                  <td>Ana Paula Silva</td>
-                  <td>(43) 99123-4567</td>
-                  <td>Limpeza de Pele (20/04)</td>
-                  <td>
-                    <button class="bt-icone">✏️</button>
-                    <button class="bt-icone">📋</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-      </div> <!-- fim tela-clientes -->
-
-      <!-- ======================== -->
-      <!--   TELA: SERVIÇOS         -->
-      <!-- ======================== -->
-      <div id="tela-servicos" class="tela">
-        <div class="top-bar">
-          <div>
-            <div class="titulo">Serviços</div>
-            <div class="subtitulo">Catálogo de serviços oferecidos</div>
-          </div>
-          <button class="bt-rosa" onclick="novoServico()">+ Novo Serviço</button>
-        </div>
-
-        <div class="conteudo">
-
-          <!-- Resumo numérico -->
-          <div class="resumo-servicos">
-            <div class="card-resumo-serv">
-              <div class="num-resumo-serv" id="total-servicos">0</div>
-              <div class="lb-resumo-serv">Serviços cadastrados</div>
-            </div>
-            <div class="card-resumo-serv">
-              <div class="num-resumo-serv" id="ticket-medio">R$ 0</div>
-              <div class="lb-resumo-serv">Ticket médio</div>
-            </div>
-            <div class="card-resumo-serv">
-              <div class="num-resumo-serv" id="mais-barato">—</div>
-              <div class="lb-resumo-serv">Mais acessível</div>
-            </div>
-            <div class="card-resumo-serv">
-              <div class="num-resumo-serv" id="mais-caro">—</div>
-              <div class="lb-resumo-serv">Premium</div>
-            </div>
-          </div>
-
-          <!-- Grid de cards de serviços -->
-          <div class="grid-servicos" id="grid-servicos">
-            <!-- preenchido pelo JS -->
-          </div>
-
-        </div>
-      </div><!-- fim tela-servicos -->
-
-      <!-- ======================== -->
-      <!--   TELA: CONSUMO          -->
-      <!-- ======================== -->
-      <div id="tela-consumo" class="tela">
-        <div class="top-bar">
-          <div>
-            <div class="titulo-pagina">Consumo</div>
-            <div class="subtitulo" id="subtitulo-consumo">Carregando...</div>
-          </div>
-          <button class="bt-rosa" onclick="abrirModalConsumo()">+ Registrar Compra</button>
-        </div>
-
-        <div class="conteudo">
-
-          <!-- Navegação de mês -->
-          <div class="nav-mes">
-            <button class="bt-seta" onclick="mudarMes(-1)">‹</button>
-            <div class="lb-mes-nav" id="lb-mes-nav">—</div>
-            <button class="bt-seta" onclick="mudarMes(+1)">›</button>
-          </div>
-
-          <!-- Resumo do mês -->
-          <div class="resumo-consumo">
-            <div class="card-resumo-cons">
-              <div class="lb-resumo-cons">Total de compras</div>
-              <div class="num-resumo-cons" id="total-compras" style="color:var(--vermelho);">R$ 0,00</div>
-            </div>
-            <div class="card-resumo-cons">
-              <div class="lb-resumo-cons">Itens registrados</div>
-              <div class="num-resumo-cons" id="qtd-itens" style="color:var(--texto);">0</div>
-            </div>
-            <div class="card-resumo-cons">
-              <div class="lb-resumo-cons">Maior gasto</div>
-              <div class="num-resumo-cons" id="maior-gasto" style="color:var(--amarelo); font-size:14px;">—</div>
-            </div>
-          </div>
-
-          <!-- Busca -->
-          <div class="busca">
-            <input type="text" id="busca-consumo" placeholder="Filtrar por produto..." oninput="renderizarConsumo()" />
-          </div>
-
-          <!-- Tabela de consumo -->
-          <table class="tabela" id="tabela-consumo">
-            <thead>
-              <tr>
-                <th>Produto</th>
-                <th>Data</th>
-                <th>Valor</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody id="tbody-consumo">
-              <!-- preenchido pelo JS -->
-            </tbody>
-          </table>
-
-          <div id="msg-consumo-vazia" class="msg-vazia" style="display:none;">
-            <div class="msg-vazia-icone">🧴</div>
-            Nenhuma compra registrada para este mês.
-          </div>
-
-        </div>
-      </div><!-- fim tela-consumo -->
-
-      <!-- ======================== -->
-      <!--   TELA: FLUXO DE CAIXA   -->
-      <!-- ======================== -->
-      <div id="tela-caixa" class="tela">
-        <div class="top-bar">
-          <div>
-            <div class="titulo">Fluxo de Caixa</div>
-              <div class="subtitulo">Controle de entradas e saídas</div>
-          </div>
-        </div>
-
-        <div class="conteudo">
-          <div class="cards-financeiro">
-            <div class="card-fin entrada">
-              <div class="lb-fin">Entradas (Mês)</div>
-              <div class="vlr-fin">R$ 4.250,00</div>
-            </div>
-            <div class="card-fin saida">
-              <div class="lb-fin">Saídas (Mês)</div>
-              <div class="vlr-fin">R$ 850,00</div>
-            </div>
-            <div class="card-fin saldo">
-              <div class="lb-fin">Saldo Atual</div>
-              <div class="vlr-fin">R$ 3.400,00</div>
-            </div>
-          </div>
-
-          <div class="secao-extrato">
-            <div class="titulo-secao">Últimas Movimentações</div>
-            <div class="lista-movimentos">
-              <div class="item-mov">
-                <span>21/04 - Design de Sobrancelha (Maria H.)</span>
-                <span class="vlr-positivo">+ R$ 50,00</span>
-              </div>
-              <div class="item-mov">
-                <span>20/04 - Compra de Materiais (Fornecedor X)</span>
-                <span class="vlr-negativo">- R$ 120,00</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div><!-- fim tela-caixa -->
-
-      <!-- ======================== -->
-      <!--   TELA: RETORNO          -->
-      <!-- ======================== -->
-      <div id="tela-retorno" class="tela">
-        <div class="top-bar">
-          <div>
-            <div class="titulo">Retorno de Clientes</div>
-            <div class="subtitulo">Clientes que precisam ser contatados para remarcar</div>
-          </div>
-        </div>
-
-        <div class="conteudo">
-
-          <!-- Cards de resumo numérico -->
-          <div class="resumo-retorno">
-            <div class="card-resumo-retorno">
-              <div class="num-resumo" id="num-hoje">0</div>
-              <div class="lb-resumo">Retorno hoje</div>
-            </div>
-            <div class="card-resumo-retorno">
-              <div class="num-resumo" id="num-3dias">0</div>
-              <div class="lb-resumo">Em até 3 dias</div>
-            </div>
-            <div class="card-resumo-retorno">
-              <div class="num-resumo" id="num-7dias">0</div>
-              <div class="lb-resumo">Em até 7 dias</div>
-            </div>
-            <div class="card-resumo-retorno">
-              <div class="num-resumo" id="num-vencidas">0</div>
-              <div class="lb-resumo">Vencidas</div>
-            </div>
-          </div>
-
-          <!-- Filtros -->
-          <div class="filtros">
-            <div class="filtro ativo" onclick="filtroRetorno('todas', this)">Todas</div>
-            <div class="filtro" onclick="filtroRetorno('hoje', this)">Hoje</div>
-            <div class="filtro" onclick="filtroRetorno('3dias', this)">Em 3 dias</div>
-            <div class="filtro" onclick="filtroRetorno('7dias', this)">Em 7 dias</div>
-            <div class="filtro" onclick="filtroRetorno('vencidas', this)">Vencidas</div>
-          </div>
-
-          <div id="lista-retorno"></div>
-
-        </div>
-      </div><!-- fim tela-retorno -->
-
-      </div><!-- fim .main -->
-    </div><!-- fim .container -->
-
-
-    <!-- ========================== -->
-    <!--   MODAIS                   -->
-    <!-- ========================== -->
-
-    <!-- Modal: Novo Agendamento -->
-    <div id="modal-agendar" class="fundo-modal" onclick="fecharJanela(event)">
-      <div class="modal">
-        <div class="titulo-modal">📅 Novo Agendamento</div>
-
-        <div class="campo">
-          <label class="lb-campo">Buscar cliente</label>
-          <input class="inp-campo" type="text" placeholder="Digite o nome..." oninput="autocomplete(this.value)" id="campo-cliente" />
-          <div class="lista-autocomplete" id="lista-autocomplete" style="display:none;"></div>
-        </div>
-
-        <div class="campo">
-          <label class="lb-campo">Serviço</label>
-          <select class="inp-campo" id="sel-servico">
-            <option value="">Selecione um serviço...</option>
-            <option value="Limpeza de Pele">Limpeza de Pele — R$ 150,00</option>
-            <option value="Design de Sobrancelha">Design de Sobrancelha — R$ 50,00</option>
-            <option value="Peeling Químico">Peeling Químico — R$ 220,00</option>
-            <option value="Hidratação Facial">Hidratação Facial — R$ 120,00</option>
-          </select>
-        </div>
-
-        <div class="linha-campos">
-          <div class="campo">
-            <label class="label-campo">Data</label>
-            <input class="input-campo" type="date" id="input-data-ag" />
-          </div>
-          <div class="campo">
-            <label class="lb-campo">Horário</label>
-            <select class="inp-campo" id="inp-hora-ag">
-              <option value="">--</option>
-              <option>08:00</option>
-              <option>09:00</option>
-              <option>10:00</option>
-              <option>11:00</option>
-              <option>12:00</option>
-              <option>13:00</option>
-              <option>14:00</option>
-              <option>15:00</option>
-              <option>16:00</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="rodape-modal">
-          <button class="bt-cinza" onclick="cancelarNovoAgendamento()">Cancelar</button>
-          <button class="bt-rosa" onclick="salvarAgendamento()">Agendar</button>
-        </div>
-      </div>
-    </div><!-- fim modal-agendar -->
-
-    <!-- Modal: Detalhe do Agendamento -->
-    <div id="modal-detalhe" class="fundo-modal" style="display:none;" onclick="fecharJanela(event)">
-      <div class="modal">
-        <div class="titulo-modal">📋 Detalhes do Agendamento</div>
-
-        <div id="conteudo-detalhe"></div>
-
-        <div class="acoes-detalhe">
-          <button class="bt-verde" onclick="baixaAgendamento('realizado')">✓ Marcar como realizado</button>
-          <button class="bt-vermelho" onclick="baixaAgendamento('cancelado')">✕ Cancelar</button>
-          <button class="bt-cinza" onclick="fecharModais()">Fechar</button>
-        </div>
-      </div>
-    </div><!-- fim modal-detalhe -->
-
-    <!-- Modal: Novo Serviço -->
-    <div id="modal-servico" class="fundo-modal" style="display:none;" onclick="fecharJanela(event)">
-      <div class="modal">
-        <div class="titulo-modal">✨ Novo Serviço</div>
-
-        <div class="campo">
-          <label class="label-campo">Nome do serviço</label>
-          <input class="input-campo" type="text" id="inp-servico-nome" placeholder="Ex: Hidratação Facial" />
-        </div>
-
-        <div class="linha-campos">
-          <div class="campo">
-            <label class="label-campo">Valor (R$)</label>
-            <input class="input-campo" type="number" id="inp-servico-valor" placeholder="0,00" min="0" step="0.01" />
-          </div>
-          <div class="campo">
-            <label class="label-campo">Retorno ideal (dias)</label>
-            <input class="input-campo" type="number" id="inp-servico-retorno" placeholder="Ex: 30" min="1" />
-          </div>
-        </div>
-
-        <div class="campo">
-          <label class="label-campo">Ícone (emoji)</label>
-          <input class="input-campo" type="text" id="inp-servico-icone" placeholder="Ex: 💆" maxlength="2" />
-        </div>
-
-        <!-- Campo oculto para edição -->
-        <input type="hidden" id="inp-servico-id" value="" />
-
-        <div class="rodape-modal">
-          <button class="bt-cinza" onclick="fecharModais()">Cancelar</button>
-          <button class="bt-rosa" onclick="salvarServico()">Salvar</button>
-        </div>
-      </div>
-  </div><!-- fim modal-servico -->
-
-  <!-- Modal: Registrar Compra -->
-  <div id="modal-consumo" class="fundo-modal" style="display:none;" onclick="fecharJanela(event)">
-    <div class="modal">
-      <div class="titulo-modal">🛍️ Registrar Compra</div>
-
-      <div class="campo">
-        <label class="label-campo">Produto comprado</label>
-        <input class="input-campo" type="text" id="inp-consumo-produto" placeholder="Ex: Ácido Mandélico 10%" />
-      </div>
-
-      <div class="linha-campos">
-        <div class="campo">
-          <label class="label-campo">Valor (R$)</label>
-          <input class="input-campo" type="number" id="inp-consumo-valor" placeholder="0,00" min="0" step="0.01" />
-        </div>
-        <div class="campo">
-          <label class="label-campo">Data</label>
-          <input class="input-campo" type="date" id="inp-consumo-data" />
-        </div>
-      </div>
-
-      <!-- Campo oculto para edição -->
-      <input type="hidden" id="inp-consumo-id" value="" />
-
-      <div class="rodape-modal">
-        <button class="bt-cinza" onclick="fecharModais()">Cancelar</button>
-        <button class="bt-rosa" onclick="salvarConsumo()">Registrar</button>
-      </div>
-    </div>
-  </div><!-- fim modal-consumo -->
+<div class="container">
+<!-- ====================== -->
+<!-- MENU LATERAL -->
+<!-- ====================== -->
+<div class="side-bar">
+<div class="logo">
+<div class="texto-logo">✿ BeautyFlow</div>
+<div class="sub-logo">Estética Profissional</div>
+</div>
+<div class="nav-item ativo" onclick="irParaTela('agenda', this)">
+<span class="nav-icone">📅</span> Agenda
+</div>
+<div class="nav-item" onclick="irParaTela('clientes', this)">
+<span class="nav-icone">👥</span> Clientes
+</div>
+<div class="nav-item" onclick="irParaTela('servicos', this)">
+<span class="nav-icone">✨</span> Serviços
+</div>
+<div class="nav-item" onclick="irParaTela('consumo', this)">
+<span class="nav-icone">️</span> Consumo
+</div>
+<div class="nav-item" onclick="irParaTela('caixa', this)">
+<span class="nav-icone">📊</span> Fluxo de Caixa
+</div>
+<div class="nav-item" onclick="irParaTela('retorno', this)">
+<span class="nav-icone">🔔</span> Retorno
+</div>
+</div>
+<!-- ====================== -->
+<!-- ÁREA PRINCIPAL -->
+<!-- ====================== -->
+<div class="main">
+<!-- ======================== -->
+<!-- TELA: AGENDA -->
+<!-- ======================== -->
+<div id="tela-agenda" class="tela ativa">
+<div class="top-bar">
+<div>
+<div class="titulo">Agenda</div>
+<div class="subtitulo" id="subtitulo-data">Carregando...</div>
+</div>
+<button class="bt-rosa" onclick="marcarData('agendar')">+ Novo
+Agendamento</button>
+</div>
+<div class="conteudo">
+<!-- Navegação de datas -->
+<div class="nav-data">
+<button class="bt-seta" onclick="alternarData(-1)">‹</button>
+<div class="lb-data-nav" id="lb-data-nav">—</div>
+<button class="bt-seta" onclick="alternarData(+1)">›</button>
+<button class="bt-cinza" onclick="agendarHoje()">Hoje</button>
+</div>
+<!-- Resumo do dia -->
+<div class="cards-resumo" id="cards-resumo"></div>
+<!-- Grade de horários -->
+<div class="grade-agenda">
+<div class="col-horas" id="col-horas"></div>
+<div class="col-agendamentos" id="col-agendamentos"></div>
+</div>
+<!-- Aviso de baixa -->
+<div class="finalizados-do-dia">
+<strong>Baixa do dia</strong> — ao final de cada atendimento, clique no card para
+marcá-lo como
+<span class="etiqueta etiqueta-verde">✓ realizado</span> ou
+<span class="etiqueta etiqueta-vermelho">✕ cancelado</span>.
+</div>
+</div>
+</div> <!-- fim tela-agenda -->
+<!-- ======================== -->
+<!-- TELA: CLIENTES -->
+<!-- ======================== -->
+<div id="tela-clientes" class="tela">
+<div class="top-bar">
+<div>
+<div class="titulo">Clientes</div>
+<div class="subtitulo">Gerenciamento de fichas e contatos</div>
+</div>
+<button class="bt-agendar" onclick="abrirModal('cliente')">+ Novo Cliente</button>
+</div>
+<div class="conteudo">
+<div class="barra-busca">
+<input type="text" class="inp-campo" placeholder="🔍 Buscar por nome ou
+telefone..." id="busca-cliente">
+</div>
+<table class="tabela-estilizada">
+<thead>
+<tr>
+<th>Nome</th>
+<th>Telefone</th>
+<th>Último Procedimento</th>
+<th>Ações</th>
+</tr>
+</thead>
+<tbody id="lista-clientes-corpo">
+</tbody>
+</table>
+</div>
+</div> <!-- fim tela-clientes -->
+<!-- ======================== -->
+<!-- TELA: SERVIÇOS -->
+<!-- ======================== -->
+<div id="tela-servicos" class="tela">
+<div class="top-bar">
+<div>
+<div class="titulo">Serviços</div>
+<div class="subtitulo">Catálogo de serviços oferecidos</div>
+</div>
+<button class="bt-rosa" onclick="novoServico()">+ Novo Serviço</button>
+</div>
+<div class="conteudo">
+<!-- Resumo numérico -->
+<div class="resumo-servicos">
+<div class="card-resumo-serv">
+<div class="num-resumo-serv" id="total-servicos">0</div>
+<div class="lb-resumo-serv">Serviços cadastrados</div>
+</div>
+<div class="card-resumo-serv">
+<div class="num-resumo-serv" id="ticket-medio">R$ 0</div>
+<div class="lb-resumo-serv">Ticket médio</div>
+</div>
+<div class="card-resumo-serv">
+<div class="num-resumo-serv" id="mais-barato">—</div>
+<div class="lb-resumo-serv">Mais acessível</div>
+</div>
+<div class="card-resumo-serv">
+<div class="num-resumo-serv" id="mais-caro">—</div>
+<div class="lb-resumo-serv">Premium</div>
+</div>
+</div>
+<!-- Grid de cards de serviços -->
+<div class="grid-servicos" id="grid-servicos"></div>
+</div>
+</div><!-- fim tela-servicos -->
+<!-- ======================== -->
+<!-- TELA: CONSUMO -->
+<!-- ======================== -->
+<div id="tela-consumo" class="tela">
+<div class="top-bar">
+<div>
+<div class="titulo-pagina">Consumo</div>
+<div class="subtitulo" id="subtitulo-consumo">Carregando...</div>
+</div>
+<button class="bt-rosa" onclick="abrirModalConsumo()">+ Registrar
+Compra</button>
+</div>
+<div class="conteudo">
+<!-- Navegação de mês -->
+<div class="nav-mes">
+<button class="bt-seta" onclick="mudarMes(-1)">‹</button>
+<div class="lb-mes-nav" id="lb-mes-nav">—</div>
+<button class="bt-seta" onclick="mudarMes(+1)">›</button>
+</div>
+<!-- Resumo do mês -->
+<div class="resumo-consumo">
+<div class="card-resumo-cons">
+<div class="lb-resumo-cons">Total de compras</div>
+<div class="num-resumo-cons" id="total-compras"
+style="color:var(--vermelho);">R$ 0,00</div>
+</div>
+<div class="card-resumo-cons">
+<div class="lb-resumo-cons">Itens registrados</div>
+<div class="num-resumo-cons" id="qtd-itens" style="color:var(--texto);">0</div>
+</div>
+<div class="card-resumo-cons">
+<div class="lb-resumo-cons">Maior gasto</div>
+<div class="num-resumo-cons" id="maior-gasto" style="color:var(--amarelo);
+font-size:14px;">—</div>
+</div>
+</div>
+<!-- Busca -->
+<div class="busca">
+<input type="text" id="busca-consumo" placeholder="Filtrar por produto..."
+oninput="renderizarConsumo()" />
+</div>
+<!-- Tabela de consumo -->
+<table class="tabela" id="tabela-consumo">
+<thead>
+<tr>
+<th>Produto</th>
+<th>Data</th>
+<th>Valor</th>
+<th></th>
+</tr>
+</thead>
+<tbody id="tbody-consumo"></tbody>
+</table>
+<div id="msg-consumo-vazia" class="msg-vazia" style="display:none;">
+<div class="msg-vazia-icone">🧴</div>
+Nenhuma compra registrada para este mês.
+</div>
+</div>
+</div><!-- fim tela-consumo -->
+<!-- ======================== -->
+<!-- TELA: FLUXO DE CAIXA -->
+<!-- ======================== -->
+<div id="tela-caixa" class="tela">
+<div class="top-bar">
+<div>
+<div class="titulo">Fluxo de Caixa</div>
+<div class="subtitulo">Controle de entradas e saídas</div>
+</div>
+</div>
+<div class="conteudo">
+<div class="cards-financeiro">
+<div class="card-fin entrada">
+<div class="lb-fin">Entradas (Mês)</div>
+<div class="vlr-fin">R$ 4.250,00</div>
+</div>
+<div class="card-fin saida">
+<div class="lb-fin">Saídas (Mês)</div>
+<div class="vlr-fin">R$ 850,00</div>
+</div>
+<div class="card-fin saldo">
+<div class="lb-fin">Saldo Atual</div>
+<div class="vlr-fin">R$ 3.400,00</div>
+</div>
+</div>
+<div class="secao-extrato">
+<div class="titulo-secao">Últimas Movimentações</div>
+<div class="lista-movimentos">
+<div class="item-mov">
+<span>21/04 - Design de Sobrancelha (Maria H.)</span>
+<span class="vlr-positivo">+ R$ 50,00</span>
+</div>
+<div class="item-mov">
+<span>20/04 - Compra de Materiais (Fornecedor X)</span>
+<span class="vlr-negativo">- R$ 120,00</span>
+</div>
+</div>
+</div>
+</div>
+</div><!-- fim tela-caixa -->
+<!-- ======================== -->
+<!-- TELA: RETORNO -->
+<!-- ======================== -->
+<div id="tela-retorno" class="tela">
+<div class="top-bar">
+<div>
+<div class="titulo">Retorno de Clientes</div>
+<div class="subtitulo">Clientes que precisam ser contatados para remarcar</div>
+</div>
+</div>
+<div class="conteudo">
+<!-- Cards de resumo numérico -->
+<div class="resumo-retorno">
+<div class="card-resumo-retorno">
+<div class="num-resumo" id="num-hoje">0</div>
+<div class="lb-resumo">Retorno hoje</div>
+</div>
+<div class="card-resumo-retorno">
+<div class="num-resumo" id="num-3dias">0</div>
+<div class="lb-resumo">Em até 3 dias</div>
+</div>
+<div class="card-resumo-retorno">
+<div class="num-resumo" id="num-7dias">0</div>
+<div class="lb-resumo">Em até 7 dias</div>
+</div>
+<div class="card-resumo-retorno">
+<div class="num-resumo" id="num-vencidas">0</div>
+<div class="lb-resumo">Vencidas</div>
+</div>
+</div>
+<!-- Filtros -->
+<div class="filtros">
+<div class="filtro ativo" onclick="filtroRetorno('todas', this)">Todas</div>
+<div class="filtro" onclick="filtroRetorno('hoje', this)">Hoje</div>
+<div class="filtro" onclick="filtroRetorno('3dias', this)">Em 3 dias</div>
+<div class="filtro" onclick="filtroRetorno('7dias', this)">Em 7 dias</div>
+<div class="filtro" onclick="filtroRetorno('vencidas', this)">Vencidas</div>
+</div>
+<div id="lista-retorno"></div>
+</div>
+</div><!-- fim tela-retorno -->
+</div><!-- fim .main -->
+</div><!-- fim .container -->
+<!-- ========================== -->
+<!-- MODAIS -->
+<!-- ========================== -->
+<!-- Modal: Novo Agendamento -->
+<div id="modal-agendar" class="fundo-modal" style="display:none;"
+onclick="fecharJanela(event)">
+<div class="modal">
+<div class="titulo-modal">📅 Novo Agendamento</div>
+<div class="campo">
+<label class="lb-campo">Buscar cliente</label>
+<input class="inp-campo" type="text" placeholder="Digite o nome..."
+oninput="autocomplete(this.value)" id="campo-cliente" />
+<div class="lista-autocomplete" id="lista-autocomplete" style="display:none;"></div>
+</div>
+<div class="campo">
+<label class="lb-campo">Serviço</label>
+<select class="inp-campo" id="sel-servico">
+<option value="">Selecione um serviço...</option>
+</select>
+</div>
+<div class="linha-campos">
+<div class="campo">
+<label class="label-campo">Data</label>
+<input class="input-campo" type="date" id="input-data-ag" />
+</div>
+<div class="campo">
+<label class="lb-campo">Horário</label>
+<select class="inp-campo" id="inp-hora-ag">
+<option value="">--</option>
+<option>08:00</option>
+<option>09:00</option>
+<option>10:00</option>
+<option>11:00</option>
+<option>12:00</option>
+<option>13:00</option>
+<option>14:00</option>
+<option>15:00</option>
+<option>16:00</option>
+</select>
+</div>
+</div>
+<div class="rodape-modal">
+<button class="bt-cinza" onclick="cancelarNovoAgendamento()">Cancelar</button>
+<button class="bt-rosa" onclick="salvarAgendamento()">Agendar</button>
+</div>
+</div>
+</div><!-- fim modal-agendar -->
+<!-- Modal: Detalhe do Agendamento -->
+<div id="modal-detalhe" class="fundo-modal" style="display:none;"
+onclick="fecharJanela(event)">
+<div class="modal">
+<div class="titulo-modal">📋 Detalhes do Agendamento</div>
+<div id="conteudo-detalhe"></div>
+<div class="acoes-detalhe">
+<button class="bt-verde" onclick="baixaAgendamento('realizado')">✓ Marcar como
+realizado</button>
+<button class="bt-vermelho" onclick="baixaAgendamento('cancelado')">✕
+Cancelar</button>
+<button class="bt-cinza" onclick="fecharModais()">Fechar</button>
+</div>
+</div>
+</div><!-- fim modal-detalhe -->
+<!-- Modal: Novo Serviço -->
+<div id="modal-servico" class="fundo-modal" style="display:none;"
+onclick="fecharJanela(event)">
+<div class="modal">
+<div class="titulo-modal">✨ Novo Serviço</div>
+<div class="campo">
+<label class="label-campo">Nome do serviço</label>
+<input class="input-campo" type="text" id="inp-servico-nome" placeholder="Ex:
+Hidratação Facial" />
+</div>
+<div class="linha-campos">
+<div class="campo">
+<label class="label-campo">Valor (R$)</label>
+<input class="input-campo" type="number" id="inp-servico-valor" placeholder="0,00"
+min="0" step="0.01" />
+</div>
+<div class="campo">
+<label class="label-campo">Retorno ideal (dias)</label>
+<input class="input-campo" type="number" id="inp-servico-retorno" placeholder="Ex:
+30" min="1" />
+</div>
+</div>
+<div class="campo">
+<label class="label-campo">Ícone (emoji)</label>
+<input class="input-campo" type="text" id="inp-servico-icone" placeholder="Ex: 💆"
+maxlength="2" />
+</div>
+<input type="hidden" id="inp-servico-id" value="" />
+<div class="rodape-modal">
+<button class="bt-cinza" onclick="fecharModais()">Cancelar</button>
+<button class="bt-rosa" onclick="salvarServico()">Salvar</button>
+</div>
+</div>
+</div><!-- fim modal-servico -->
+<!-- Modal: Registrar Compra -->
+<div id="modal-consumo" class="fundo-modal" style="display:none;"
+onclick="fecharJanela(event)">
+<div class="modal">
+<div class="titulo-modal">️ Registrar Compra</div>
+<div class="campo">
+<label class="label-campo">Produto comprado</label>
+<input class="input-campo" type="text" id="inp-consumo-produto" placeholder="Ex:
+Ácido Mandélico 10%" />
+</div>
+<div class="linha-campos">
+<div class="campo">
+<label class="label-campo">Valor (R$)</label>
+<input class="input-campo" type="number" id="inp-consumo-valor"
+placeholder="0,00" min="0" step="0.01" />
+</div>
+<div class="campo">
+<label class="label-campo">Data</label>
+<input class="input-campo" type="date" id="inp-consumo-data" />
+</div>
+</div>
+<input type="hidden" id="inp-consumo-id" value="" />
+<div class="rodape-modal">
+<button class="bt-cinza" onclick="fecharModais()">Cancelar</button>
+<button class="bt-rosa" onclick="salvarConsumo()">Registrar</button>
+</div>
+</div>
+</div><!-- fim modal-consumo -->
+<script src="beautyflow.js"></script>
 </body>
 </html>
