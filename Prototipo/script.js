@@ -37,7 +37,6 @@ function irParaTela(nome, el) {
   if (tela) tela.classList.add('ativa');
   if (el)   el.classList.add('ativo');
 
-  // inicializa cada tela ao abrir
   if (nome === 'agenda')   iniciarAgenda();
   if (nome === 'clientes') renderizarClientes();
   if (nome === 'servicos') renderizarServicos();
@@ -49,6 +48,10 @@ function irParaTela(nome, el) {
 //  MODAIS
 // ------------------------------------------------------------
 function abrirModal(id) {
+  if (id === 'cliente') {
+    abrirModalCliente();
+    return;
+  }
   const el = document.getElementById('modal-' + id);
   if (el) el.style.display = 'flex';
 }
@@ -99,13 +102,11 @@ function renderizarGrade() {
   const chave = dataAtual.toISOString().slice(0, 10);
   const dodia = agendamentos.filter(a => a.data === chave);
 
-  // coluna de horas
   const colH = document.getElementById('col-horas');
   colH.innerHTML = HORAS.map(h =>
     `<div class="hora-slot">${h}</div>`
   ).join('');
 
-  // coluna de agendamentos
   const colA = document.getElementById('col-agendamentos');
   colA.innerHTML = HORAS.map(h => {
     const ag = dodia.find(a => a.hora === h);
@@ -122,8 +123,7 @@ function renderizarGrade() {
             </div>`;
   }).join('');
 
-  // cards de resumo
-  const total     = dodia.length;
+  const total      = dodia.length;
   const realizados = dodia.filter(a => a.status === 'realizado').length;
   const cancelados = dodia.filter(a => a.status === 'cancelado').length;
   const pendentes  = dodia.filter(a => a.status === 'agendado').length;
@@ -136,7 +136,6 @@ function renderizarGrade() {
   `;
 }
 
-// Abre modal de novo agendamento
 function marcarData() {
   const hoje = dataAtual.toISOString().slice(0, 10);
   document.getElementById('input-data-ag').value = hoje;
@@ -145,12 +144,12 @@ function marcarData() {
   document.getElementById('inp-hora-ag').value   = '';
   clienteSelecionado = null;
 
-  // preenche o select de serviços dinamicamente
   const sel = document.getElementById('sel-servico');
   sel.innerHTML = '<option value="">Selecione um serviço...</option>' +
     servicos.map(s => `<option value="${s.id}">${s.icone} ${s.nome} — R$ ${s.valor.toFixed(2).replace('.',',')}</option>`).join('');
 
-  abrirModal('agendar');
+  const modal = document.getElementById('modal-agendar');
+  if (modal) modal.style.display = 'flex';
 }
 
 function cancelarNovoAgendamento() { fecharModais(); }
@@ -207,14 +206,12 @@ function salvarAgendamento() {
   salvar('bf_agendamentos', agendamentos);
   fecharModais();
 
-  // vai pra data agendada
   const [y, m, d] = data.split('-').map(Number);
   dataAtual = new Date(y, m - 1, d);
   renderizarDataNav();
   renderizarGrade();
 }
 
-// Detalhe do agendamento
 let agIdEditando = null;
 
 function abrirDetalhe(id) {
@@ -230,7 +227,8 @@ function abrirDetalhe(id) {
     <p><strong>Valor:</strong> R$ ${ag.valor.toFixed(2).replace('.',',')}</p>
     <p><strong>Status:</strong> <span class="etiqueta ${ag.status === 'realizado' ? 'etiqueta-verde' : ag.status === 'cancelado' ? 'etiqueta-vermelho' : 'etiqueta-amarelo'}">${ag.status}</span></p>
   `;
-  abrirModal('detalhe');
+  const modal = document.getElementById('modal-detalhe');
+  if (modal) modal.style.display = 'flex';
 }
 
 function baixaAgendamento(status) {
@@ -246,7 +244,7 @@ function baixaAgendamento(status) {
 //  CLIENTES
 // ------------------------------------------------------------
 function renderizarClientes(filtro) {
-  const busca = filtro || document.getElementById('busca-cliente')?.value.toLowerCase() || '';
+  const busca = filtro !== undefined ? filtro : (document.getElementById('busca-cliente')?.value.toLowerCase() || '');
   const lista = clientes.filter(c =>
     c.nome.toLowerCase().includes(busca) ||
     (c.telefone || '').includes(busca)
@@ -285,33 +283,46 @@ document.addEventListener('DOMContentLoaded', () => {
   if (inp) inp.addEventListener('input', () => renderizarClientes(inp.value.toLowerCase()));
 });
 
-function abrirModal_cliente() {
-  // reutiliza o modal de agendamento como cadastro de cliente simples
-  const nome = prompt('Nome do cliente:');
-  if (!nome?.trim()) return;
-  const tel  = prompt('Telefone:');
-  clientes.push({ id: Date.now(), nome: nome.trim(), telefone: tel || '' });
+// Abre o modal de cliente para NOVO cadastro
+function abrirModalCliente() {
+  document.getElementById('inp-cliente-nome').value     = '';
+  document.getElementById('inp-cliente-telefone').value = '';
+  document.getElementById('inp-cliente-id').value       = '';
+  document.getElementById('titulo-modal-cliente').textContent = '👤 Novo Cliente';
+  const modal = document.getElementById('modal-cliente');
+  if (modal) modal.style.display = 'flex';
+}
+
+// Salva (novo ou edição) a partir do modal
+function salvarCliente() {
+  const nome   = document.getElementById('inp-cliente-nome').value.trim();
+  const tel    = document.getElementById('inp-cliente-telefone').value.trim();
+  const idEdit = document.getElementById('inp-cliente-id').value;
+
+  if (!nome) { alert('Informe o nome do cliente.'); return; }
+
+  if (idEdit) {
+    const c = clientes.find(x => x.id == idEdit);
+    if (c) { c.nome = nome; c.telefone = tel; }
+  } else {
+    clientes.push({ id: Date.now(), nome, telefone: tel });
+  }
+
   salvar('bf_clientes', clientes);
+  fecharModais();
   renderizarClientes();
 }
 
-// override do onclick do HTML: onclick="abrirModal('cliente')"
-const _abrirModalOrig = window.abrirModal;
-window.abrirModal = function(id) {
-  if (id === 'cliente') { abrirModal_cliente(); return; }
-  _abrirModalOrig(id);
-};
-
+// Editar cliente — abre modal já preenchido
 function editarCliente(id) {
   const c = clientes.find(x => x.id === id);
   if (!c) return;
-  const nome = prompt('Nome:', c.nome);
-  if (nome === null) return;
-  const tel  = prompt('Telefone:', c.telefone);
-  c.nome = nome.trim() || c.nome;
-  c.telefone = tel ?? c.telefone;
-  salvar('bf_clientes', clientes);
-  renderizarClientes();
+  document.getElementById('inp-cliente-nome').value     = c.nome;
+  document.getElementById('inp-cliente-telefone').value = c.telefone || '';
+  document.getElementById('inp-cliente-id').value       = c.id;
+  document.getElementById('titulo-modal-cliente').textContent = '✏️ Editar Cliente';
+  const modal = document.getElementById('modal-cliente');
+  if (modal) modal.style.display = 'flex';
 }
 
 function excluirCliente(id) {
@@ -361,7 +372,8 @@ function novoServico() {
   document.getElementById('inp-servico-icone').value   = '';
   document.getElementById('inp-servico-id').value      = '';
   document.querySelector('#modal-servico .titulo-modal').textContent = '✨ Novo Serviço';
-  abrirModal('servico');
+  const modal = document.getElementById('modal-servico');
+  if (modal) modal.style.display = 'flex';
 }
 
 function editarServico(id) {
@@ -373,7 +385,8 @@ function editarServico(id) {
   document.getElementById('inp-servico-icone').value   = s.icone || '';
   document.getElementById('inp-servico-id').value      = s.id;
   document.querySelector('#modal-servico .titulo-modal').textContent = '✏️ Editar Serviço';
-  abrirModal('servico');
+  const modal = document.getElementById('modal-servico');
+  if (modal) modal.style.display = 'flex';
 }
 
 function salvarServico() {
@@ -438,8 +451,8 @@ function renderizarConsumo() {
            c.produto.toLowerCase().includes(busca);
   });
 
-  const tbody = document.getElementById('tbody-consumo');
-  const msg   = document.getElementById('msg-consumo-vazia');
+  const tbody  = document.getElementById('tbody-consumo');
+  const msg    = document.getElementById('msg-consumo-vazia');
   const tabela = document.getElementById('tabela-consumo');
 
   if (!filtradas.length) {
@@ -464,7 +477,6 @@ function renderizarConsumo() {
       `).join('');
   }
 
-  // resumo
   const total = filtradas.reduce((s, c) => s + parseFloat(c.valor), 0);
   document.getElementById('total-compras').textContent = 'R$ ' + total.toFixed(2).replace('.',',');
   document.getElementById('qtd-itens').textContent     = filtradas.length;
@@ -482,7 +494,8 @@ function abrirModalConsumo() {
   document.getElementById('inp-consumo-valor').value   = '';
   document.getElementById('inp-consumo-data').value    = new Date().toISOString().slice(0, 10);
   document.getElementById('inp-consumo-id').value      = '';
-  abrirModal('consumo');
+  const modal = document.getElementById('modal-consumo');
+  if (modal) modal.style.display = 'flex';
 }
 
 function salvarConsumo() {
@@ -512,7 +525,8 @@ function editarCompra(id) {
   document.getElementById('inp-consumo-valor').value   = c.valor;
   document.getElementById('inp-consumo-data').value    = c.data;
   document.getElementById('inp-consumo-id').value      = c.id;
-  abrirModal('consumo');
+  const modal = document.getElementById('modal-consumo');
+  if (modal) modal.style.display = 'flex';
 }
 
 function excluirCompra(id) {
@@ -544,7 +558,6 @@ function renderizarRetorno() {
     retornos.push({ ag, serv, retorno, diff });
   });
 
-  // contadores
   const nHoje    = retornos.filter(r => r.diff === 0).length;
   const n3dias   = retornos.filter(r => r.diff > 0 && r.diff <= 3).length;
   const n7dias   = retornos.filter(r => r.diff > 0 && r.diff <= 7).length;
@@ -555,7 +568,6 @@ function renderizarRetorno() {
   document.getElementById('num-7dias').textContent   = n7dias;
   document.getElementById('num-vencidas').textContent= nVencidas;
 
-  // filtro
   let lista = retornos;
   if (filtroRetornoAtivo === 'hoje')    lista = retornos.filter(r => r.diff === 0);
   if (filtroRetornoAtivo === '3dias')   lista = retornos.filter(r => r.diff > 0 && r.diff <= 3);
@@ -623,7 +635,6 @@ estilos.textContent = `
     margin-left: auto; font-size: 11px; font-weight: 700; padding: 2px 8px;
     border-radius: 50px; background: var(--borda); color: var(--texto-leve);
   }
-  #modal-agendar { display: none; }
 `;
 document.head.appendChild(estilos);
 
@@ -631,8 +642,5 @@ document.head.appendChild(estilos);
 //  INICIALIZAÇÃO
 // ------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-  // o modal de agendamento começa escondido
-  document.getElementById('modal-agendar').style.display = 'none';
-  // abre na tela da agenda
   iniciarAgenda();
 });
